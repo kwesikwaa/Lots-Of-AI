@@ -2,6 +2,7 @@
 from decouple import config
 from PIL import Image
 import openai
+import pyttsx3
 
 APIKEY= config('APIKEY')
 API_KEY = config('API_KEY')
@@ -11,8 +12,13 @@ audiomodel = 'whisper-1'
 
 
 history = [
-    {"role":"system","content":'You are a very a biology teacher. You answer only biology questions'}
+    {"role":"system","content":'You are an assistant. You give brief and straightforward responses. You make your responses feel human, a bit jovial sometimes but mostly conscise'}
 ]
+
+
+# frontend inputs audio, the audio is transcribed via audioToText function, results sent to chatassistant, results from chatassistant sent to speaktheresult function
+# keep chat records by appending questions to database...could be helpful
+
 
 def chatassistant(quest: str):
     question = history.append({"role":"user", "content":quest})
@@ -25,7 +31,6 @@ def chatassistant(quest: str):
     question.append({"role":"assistant", "content": result})
     
     return result
-
 
 
 def audioToText(audiofile: str):
@@ -51,7 +56,8 @@ def audioTranslate(audiototranslate: str):
     )
     return translate['text']
 
-def imagegenerate(prompt: str):
+
+def textToIMage(prompt: str):
     response = openai.Image.create(
         prompt = prompt,
         n=1,
@@ -60,9 +66,15 @@ def imagegenerate(prompt: str):
     imagelink = response.data[0].url
     print(imagelink)
 
+
+def imageToText(image):
+    pass
+
+
+
 # imagegenerate('3d render. a little african girl. white dreadlocks. smiling. holding ice cream. standing in the street. bright background out of depth medium shot. sylized. hyperealistic render. cinematic scene')
 
-import pyttsx3
+
 
 
 def speaktheresult(result: str):
