@@ -3,6 +3,7 @@ from decouple import config
 from PIL import Image
 import openai
 import pyttsx3
+import easyocr
 
 APIKEY= config('APIKEY')
 API_KEY = config('API_KEY')
@@ -67,8 +68,10 @@ def textToIMage(prompt: str):
     print(imagelink)
 
 
-def imageToText(image):
-    pass
+easyread = easyocr.Reader(['en'],gpu=True)
+
+def imageToText(image: str):
+    text = easyread.readtext(image)
 
 
 
@@ -86,10 +89,12 @@ def speaktheresult(result: str):
     # ts.save_to_file('savefilename.mp3')
     ts.runAndWait()
 
+if __name__ == "__main__:":
+    speaktheresult('Hey there, we are hear to ensure everything is going to work')
+    # print(audioToText('speechtestfile.mp4'))
+    # print(audioTranslate('portuguesefiletest.mp4'))
+    # print(f'------>>>>>>>> DONE')
+    # print(audioTranslate('germantestfile.mp4'))
 
-speaktheresult('Hey there, we are hear to ensure everything is going to work')
-# print('about to run.....')
-# print(audioToText('speechtestfile.mp4'))
-# print(audioTranslate('portuguesefiletest.mp4'))
-# print(f'------>>>>>>>> DONE')
-# print(audioTranslate('germantestfile.mp4'))
+
+
