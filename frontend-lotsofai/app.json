@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "lotsofai",
-    "slug": "lotsofai",
+    "name": "frontend-lotsofai",
+    "slug": "frontend-lotsofai",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

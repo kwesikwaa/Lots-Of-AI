@@ -32,3 +32,27 @@ image.save("prompt.png")
 #     final_images.append(image)
 
 # make_image_grid(final_images,1,len(final_images)).save("results.jpg")
+
+
+
+
+# personal test... generative arts ai with locally deployed stablediffusion
+
+
+
+from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
+import torch
+
+prompt =input(" ")
+model_id = "stabilityai/stable-diffusion-2-1"
+
+# Use the DPMSolverMultistepScheduler (DPM-Solver++) scheduler here instead
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+pipe = pipe.to("cuda")
+
+
+image = pipe(prompt).images[0]
+    
+image.save("prompt.png")
+
