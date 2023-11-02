@@ -68,6 +68,7 @@ def textToIMage(prompt: str):
     print(imagelink)
 
 
+# this operation will be replaced in the frontend with reat-native tools
 easyread = easyocr.Reader(['en'],gpu=True)
 
 def imageToText(image: str):
