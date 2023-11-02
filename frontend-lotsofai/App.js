@@ -1,20 +1,37 @@
 
 import { StyleSheet, Text, View,TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons'
+import {NavigationContainer} from '@react-navigation/native'
+
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+
+import TextToImage from './routes/textToImage';
+import Chatgpt from './routes/chatgpt';
+import Transcriptor from './routes/transcriptor';
+import Translator from './routes/translator';
+import ImageToText from './routes/imageToText';
+
 
 export default function App() {
+
+	const Tab = createMaterialBottomTabNavigator();
+
   return (
-	//<SafeAreaView>
-		<View className='flex justify-center items-center bg-slate-100'>
-			<Text>Running offline hopefully it runs well oh yes t does!</Text>
-			<TouchableOpacity className="bg-red-200 p-4 rounded-md my-4">
-				<Text>BUTTONO</Text>
-			</TouchableOpacity>
-			<TouchableOpacity className="bg-red-200 p-4 rounded-md my-4">
-				<MaterialIcons name='delete' />
-			</TouchableOpacity>
-		</View>
-	//</SafeAreaView>
+	<>
+		<Tab.Navigator>
+			<Tab.Screen name="text_to_image" component={TextToImage} 
+				options={{tabBarIcon: "image-edit"}} />
+			<Tab.Screen name="chatgpt" component={Chatgpt}
+				options={{tabBarIcon:"chat-plus"}} />
+			<Tab.Screen name="transcriptor" component={Transcriptor} 
+				options={{tabBarIcon:"text-to-speech"}}/>
+			<Tab.Screen name="translator" component={Translator} 
+				options={{tabBarIcon:"translate"}}/>
+			<Tab.Screen name="image_to_text" component={ImageToText} 
+				options={{tabBarIcon:"image-text"}}/>
+		</Tab.Navigator>
+	</>
+
   );
 }
 
