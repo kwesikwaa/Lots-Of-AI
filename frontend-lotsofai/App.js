@@ -1,9 +1,9 @@
 
 import { StyleSheet, Text, View,TouchableOpacity, SafeAreaView, Button } from 'react-native';
-import {MaterialIcons} from '@expo/vector-icons'
-import {NavigationContainer} from '@react-navigation/native'
 
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+import {NavigationContainer} from '@react-navigation/native'
+import {createMaterialBottomTabNavigator,} from '@react-navigation/material-bottom-tabs'
+
 
 import TextToImage from './routes/textToImage';
 import Chatgpt from './routes/chatgpt';
@@ -18,18 +18,21 @@ export default function App() {
 
   return (
 	<>
-		<Tab.Navigator>
-			<Tab.Screen name="text_to_image" component={TextToImage} 
-				options={{tabBarIcon: "image-edit"}} />
-			<Tab.Screen name="chatgpt" component={Chatgpt}
-				options={{tabBarIcon:"chat-plus"}} />
-			<Tab.Screen name="transcriptor" component={Transcriptor} 
-				options={{tabBarIcon:"text-to-speech"}}/>
-			<Tab.Screen name="translator" component={Translator} 
-				options={{tabBarIcon:"translate"}}/>
-			<Tab.Screen name="image_to_text" component={ImageToText} 
-				options={{tabBarIcon:"image-text"}}/>
-		</Tab.Navigator>
+		<NavigationContainer>
+			<Tab.Navigator>
+				<Tab.Screen name="text_to_image" component={TextToImage} 
+					options={{tabBarIcon: "image-edit"}} />
+				<Tab.Screen name="chatgpt" component={Chatgpt}
+					options={{tabBarIcon:"chat-plus"}} />
+				<Tab.Screen name="transcriptor" component={Transcriptor} 
+					options={{tabBarIcon:"text-to-speech"}}/>
+				<Tab.Screen name="translator" component={Translator} 
+					options={{tabBarIcon:"translate"}}/>
+				<Tab.Screen name="image_to_text" component={ImageToText} 
+					options={{tabBarIcon:"image-text"}}/>
+			</Tab.Navigator> 
+		</NavigationContainer> 
+		{/* <View><Text>Hi there</Text></View> */}
 	</>
 
   );
@@ -37,6 +40,7 @@ export default function App() {
 
 
 // npm i react-navigation
+// useRouter from 'expo-router'
 
 
 //  expo install react-native-gesture-handler react-native-reanimated
