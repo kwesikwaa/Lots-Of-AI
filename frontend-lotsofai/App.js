@@ -1,8 +1,10 @@
 
-import { StyleSheet, Text, View,TouchableOpacity, SafeAreaView, Button } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity, Button } from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native'
 import {createMaterialBottomTabNavigator,} from '@react-navigation/material-bottom-tabs'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSafeAreaInsets,SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 import TextToImage from './routes/textToImage';
@@ -15,24 +17,28 @@ import ImageToText from './routes/imageToText';
 export default function App() {
 
 	const Tab = createMaterialBottomTabNavigator();
+	const Stack = createNativeStackNavigator();
 
   return (
 	<>
-		<NavigationContainer>
-			<Tab.Navigator>
-				<Tab.Screen name="text_to_image" component={TextToImage} 
-					options={{tabBarIcon: "image-edit"}} />
-				<Tab.Screen name="chatgpt" component={Chatgpt}
-					options={{tabBarIcon:"chat-plus"}} />
-				<Tab.Screen name="transcriptor" component={Transcriptor} 
-					options={{tabBarIcon:"text-to-speech"}}/>
-				<Tab.Screen name="translator" component={Translator} 
-					options={{tabBarIcon:"translate"}}/>
-				<Tab.Screen name="image_to_text" component={ImageToText} 
-					options={{tabBarIcon:"image-text"}}/>
-			</Tab.Navigator> 
-		</NavigationContainer> 
-		{/* <View><Text>Hi there</Text></View> */}
+		<SafeAreaProvider>
+			<NavigationContainer>
+				<Tab.Navigator initialRouteName='chatgpt'>
+					<Tab.Screen name="text_to_image" component={TextToImage} 
+						options={{tabBarIcon: "image-edit"}} />
+					<Tab.Screen name="chatgpt" component={Chatgpt}
+						options={{tabBarIcon:"chat-plus"}} />
+					<Tab.Screen name="transcriptor" component={Transcriptor} 
+						options={{tabBarIcon:"text-to-speech"}}/>
+					<Tab.Screen name="translator" component={Translator} 
+						options={{tabBarIcon:"translate"}}/>
+					<Tab.Screen name="image_to_text" component={ImageToText} 
+						options={{tabBarIcon:"image-text"}}/>
+				</Tab.Navigator> 
+
+
+			</NavigationContainer> 
+		</SafeAreaProvider>
 	</>
 
   );
