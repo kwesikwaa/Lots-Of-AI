@@ -1,5 +1,6 @@
-import { View, Text, FlatList, TextInput, Button } from 'react-native'
+import { View, Text, FlatList, TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
+
 // import { TextInput } from 'react-native-paper';
 
 export default function TextToImage() {
@@ -22,7 +23,7 @@ export default function TextToImage() {
         {'dat':'you see say we dey form','key':15},
         {'dat':'a3 for life chale','key':16}, 
         {'dat':'something dey here','key':17},
-        {'dat':'so adey go some','key':18},
+         {'dat':'so adey go some','key':18},
         {'dat':'you see say we dey form','key':19},
         {'dat':'a3 for life chale','key':20},
         {'dat':'something dey here','key':21},
@@ -36,18 +37,16 @@ export default function TextToImage() {
         <View className=" h-5/6">
             <FlatList data={x} keyExtractor={(item)=>item.key} inverted={true}
                 renderItem={({item})=>(
-                    <View className="bg-zinc-600 rounded-md w-full my-2 pl-1">
+                    <View className="bg-neutral-700 rounded-b-md rounded-r-md w-full my-2 px-2 pb-4  min-h-max">
                         <Text className=" my-2 text-white">{item.dat}</Text>
-                        <View className="bg-slate-500 h-64 w-4/5"></View>
-
-
+                        <View className="bg-neutral-600 h-64 w-4/5"></View>
                     </View>
                 )}
             />
         </View>
-        <View className="flex flex-row justify-between space-x-1 items-end border-blue-500 border rounded-md">
-            <TextInput placeholder='Enter Prompt' multiline numberOfLines={5} className=" w-5/6 py-1.5 px-1.5"/>
-            <Button title='Send'/>
+        <View className="flex flex-row justify-between space-x-1 items-end rounded-md bg-neutral-700 shadow-md">
+          <TextInput placeholder='Enter Prompt' placeholderTextColor="white" multiline className=" text-white w-5/6 py-1.5 px-1.5"/>
+          <TouchableOpacity className="p-1.5 border border-zinc-300"><Text className=" text-white text-xl">Send</Text></TouchableOpacity>
         </View>
     </View>
     )

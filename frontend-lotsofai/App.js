@@ -1,10 +1,7 @@
-
-import { StyleSheet, Text, View,TouchableOpacity, Button } from 'react-native';
-
 import {NavigationContainer} from '@react-navigation/native'
 import {createMaterialBottomTabNavigator,} from '@react-navigation/material-bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useSafeAreaInsets,SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider,SafeAreaView } from 'react-native-safe-area-context';
 
 
 import TextToImage from './routes/textToImage';
@@ -22,22 +19,22 @@ export default function App() {
   return (
 	<>
 		<SafeAreaProvider>
-			<NavigationContainer>
-				<Tab.Navigator initialRouteName='chatgpt'>
-					<Tab.Screen name="text_to_image" component={TextToImage} 
-						options={{tabBarIcon: "image-edit"}} />
-					<Tab.Screen name="chatgpt" component={Chatgpt}
-						options={{tabBarIcon:"chat-plus"}} />
-					<Tab.Screen name="transcriptor" component={Transcriptor} 
-						options={{tabBarIcon:"text-to-speech"}}/>
-					<Tab.Screen name="translator" component={Translator} 
-						options={{tabBarIcon:"translate"}}/>
-					<Tab.Screen name="image_to_text" component={ImageToText} 
-						options={{tabBarIcon:"image-text"}}/>
-				</Tab.Navigator> 
-
-
-			</NavigationContainer> 
+			<SafeAreaView style={{flex:1}}>
+				<NavigationContainer>
+					<Tab.Navigator initialRouteName='text_to_image'>
+						<Tab.Screen name="text_to_image" component={TextToImage} 
+							options={{tabBarIcon: "image-edit"}} />
+						<Tab.Screen name="chatgpt" component={Chatgpt}
+							options={{tabBarIcon:"chat-plus"}} />
+						<Tab.Screen name="transcriptor" component={Transcriptor} 
+							options={{tabBarIcon:"text-to-speech"}}/>
+						<Tab.Screen name="translator" component={Translator} 
+							options={{tabBarIcon:"translate"}}/>
+						<Tab.Screen name="image_to_text" component={ImageToText} 
+							options={{tabBarIcon:"image-text"}}/>
+					</Tab.Navigator> 
+				</NavigationContainer> 
+			</SafeAreaView>
 		</SafeAreaProvider>
 	</>
 

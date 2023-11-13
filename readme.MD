@@ -1,5 +1,6 @@
 # frontend/mobile
 ### built in reactNative
+### signals for state management mainly to avoid rebuilds associated with useState
 
 
 # backend
