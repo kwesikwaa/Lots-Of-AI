@@ -1,11 +1,10 @@
-import { View, Text, FlatList, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
-
-// import { TextInput } from 'react-native-paper';
+import { View, Text, FlatList, TextInput, TouchableOpacity, Keyboard } from 'react-native'
+import React,{useRef} from 'react'
+import { useSignal } from '@preact/signals-react';
 
 export default function TextToImage() {
 
-    const x = [
+    const x = useSignal([
         {'dat':'something dey here','key':1},
         {'dat':'so adey go some','key':2},
         {'dat':'you see say we dey form','key':3},
@@ -30,12 +29,30 @@ export default function TextToImage() {
         {'dat':'so adey go some','key':22},
         {'dat':'you see say we dey form','key':23},
         {'dat':'a3 for life chale','key':24},  
-    ];
+    ]);
+
+    const flviewRef = useRef()
+    const message = useSignal('')
+
+    const send =()=>{
+        if(message.value.trim().length>0){
+            Keyboard.dismiss()
+            x.value.push({'dat':message.value,'key':x.value.length+1})
+            message.value=''
+            scrollup()   
+        }   
+    }
+
+    const scrollup =()=>{
+        setTimeout(()=>flviewRef.current.scrollToEnd(),400)
+    }
+    scrollup()
+    
 
     return (
     <View className="flex flex-col p-1 h-full w-full justify-between">
-        <View className=" h-5/6">
-            <FlatList data={x} keyExtractor={(item)=>item.key} inverted={true}
+        <View className="flex-1 mb-4">
+            <FlatList data={x.value} keyExtractor={(item)=>item.key} ref={flviewRef}
                 renderItem={({item})=>(
                     <View className="bg-neutral-700 rounded-b-md rounded-r-md w-full my-2 px-2 pb-4  min-h-max">
                         <Text className=" my-2 text-white">{item.dat}</Text>
@@ -44,9 +61,9 @@ export default function TextToImage() {
                 )}
             />
         </View>
-        <View className="flex flex-row justify-between space-x-1 items-end rounded-md bg-neutral-700 shadow-md">
-          <TextInput placeholder='Enter Prompt' placeholderTextColor="white" multiline className=" text-white w-5/6 py-1.5 px-1.5"/>
-          <TouchableOpacity className="p-1.5 border border-zinc-300"><Text className=" text-white text-xl">Send</Text></TouchableOpacity>
+        <View className="mb-4 flex flex-row justify-between space-x-1 items-end rounded-md bg-neutral-700 shadow-md">
+          <TextInput placeholder='Enter Prompt' placeholderTextColor="white" multiline value={message}   onChangeText={(val)=> message.value=val} className=" text-white w-5/6 py-1.5 px-1.5"/>
+          <TouchableOpacity className="p-1.5 border border-zinc-300" onPress={send}><Text className=" text-white text-xl">Send</Text></TouchableOpacity>
         </View>
     </View>
     )

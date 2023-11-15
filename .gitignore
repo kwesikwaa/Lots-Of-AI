@@ -1,37 +1,38 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
-/frontend/node_modules/
+/frontend-lotsofai/node_modules/
 
 # Expo
-/frontend/.expo/
-/frontend/dist/
-/frontend/web-build/
+/frontend-lotsofai/.expo/
+/frontend-lotsofai/dist/
+/frontend-lotsofai/web-build/
 
 # Native
-/frontend/*.orig.*
-/frontend/*.jks
-/frontend/*.p8
-/frontend/*.p12
-/frontend/*.key
-/frontend/*.mobileprovision
+/frontend-lotsofai/*.orig.*
+/frontend-lotsofai/*.jks
+/frontend-lotsofai/*.p8
+/frontend-lotsofai/*.p12
+/frontend-lotsofai/*.key
+/frontend-lotsofai/*.mobileprovision
 
 # Metro
-/frontend/.metro-health-check*
+/frontend-lotsofai/.metro-health-check*
 
 # debug
-/frontend/npm-debug.*
-/frontend/yarn-debug.*
-/frontend/yarn-error.*
+/frontend-lotsofai/npm-debug.*
+/frontend-lotsofai/yarn-debug.*
+/frontend-lotsofai/yarn-error.*
 
 # macOS
-/frontend/.DS_Store
-/frontend/*.pem
+/frontend-lotsofai/.DS_Store
+/frontend-lotsofai/*.pem
 
 # local env files
-/frontend/.env*.local
+/frontend-lotsofai/.env*.local
+/frontend-lotsofai/env.js
 
 # typescript
-/frontend/*.tsbuildinfo
+/frontend-lotsofai/*.tsbuildinfo
 
 /backend/.env
