@@ -1,35 +1,38 @@
 import { View, Text, FlatList, TextInput, Keyboard, TouchableOpacity } from 'react-native'
 import React,{useRef} from 'react'
 import { signal } from '@preact/signals-react';
+import { tochatai } from '../api/openaicall';
+
+export const chats = signal([
+    {"role":"system","key":0,
+        "content":'You are an assistant. You give brief and straightforward responses. You make your responses feel human, a bit jovial sometimes but mostly conscise'},
+    // {'content':'HAHA something dey here number one \nsomeont sos sysd \ni go evn longer on this one to see whsaty will it now eclips eofr ogo and fif sodsf l s hlhlkl  khlkjkl  lklkjo  lkshjsl  slk slk dklfjs  ojslkjdi  dskfjoks fsdkfnl','key':1,'role':'user'},
+    // {'content':'so adey go some','key':2,'role':'bot'},
+    // {'content':'you see say we dey form','key':3,'role':'user'},
+    // {'content':'a3 for life chale','key':4,'role':'bot'},        
+    // {'content':'something dey here','key':5,'role':'user'},
+    // {'content':'so adey go some','key':6,'role':'bot'},
+    // {'content':'you see say we dey form','key':7,'role':'user'},
+    // {'content':'a3 for life chale','key':8,'role':'bot'}, 
+    // {'content':'something dey here','key':9,'role':'user'},
+    // {'content':'so adey go some','key':10,'role':'bot'},
+    // {'content':'you see say we dey form','key':11,'role':'user'},
+    // {'content':'a3 for life chale','key':12,'role':'bot'}, 
+    // {'content':'something dey here','key':13,'role':'user'},
+    // {'content':'so adey go some','key':14,'role':'bot'},
+    // {'content':'you see say we dey form','key':15,'role':'user'},
+    // {'content':'a3 for life chale','key':16,'role':'bot'}, 
+    // {'content':'something dey here','key':17,'role':'user'},
+    // {'content':'so adey go some','key':18,'role':'bot'},
+    // {'content':'you see say we dey form','key':19,'role':'user'},
+    // {'content':'a3 for life chale','key':20,'role':'bot'},
+    // {'content':'something dey here','key':21,'role':'user'},
+    // {'content':'so adey go some','key':22,'role':'bot'},
+    // {'content':'you see say we dey form','key':23,'role':'user'},
+    // {'content':'a3 for life chale last','key':24,'role':'bot'},  
+])
 
 export default function Chatgpt() {
-
-  const x = signal([
-    {'content':'HAHA something dey here number one \nsomeont sos sysd \ni go evn longer on this one to see whsaty will it now eclips eofr ogo and fif sodsf l s hlhlkl  khlkjkl  lklkjo  lkshjsl  slk slk dklfjs  ojslkjdi  dskfjoks fsdkfnl','key':1,'role':'user'},
-    {'content':'so adey go some','key':2,'role':'bot'},
-    {'content':'you see say we dey form','key':3,'role':'user'},
-    {'content':'a3 for life chale','key':4,'role':'bot'},        
-    {'content':'something dey here','key':5,'role':'user'},
-    {'content':'so adey go some','key':6,'role':'bot'},
-    {'content':'you see say we dey form','key':7,'role':'user'},
-    {'content':'a3 for life chale','key':8,'role':'bot'}, 
-    {'content':'something dey here','key':9,'role':'user'},
-    {'content':'so adey go some','key':10,'role':'bot'},
-    {'content':'you see say we dey form','key':11,'role':'user'},
-    {'content':'a3 for life chale','key':12,'role':'bot'}, 
-    {'content':'something dey here','key':13,'role':'user'},
-    {'content':'so adey go some','key':14,'role':'bot'},
-    {'content':'you see say we dey form','key':15,'role':'user'},
-    {'content':'a3 for life chale','key':16,'role':'bot'}, 
-    {'content':'something dey here','key':17,'role':'user'},
-    {'content':'so adey go some','key':18,'role':'bot'},
-    {'content':'you see say we dey form','key':19,'role':'user'},
-    {'content':'a3 for life chale','key':20,'role':'bot'},
-    {'content':'something dey here','key':21,'role':'user'},
-    {'content':'so adey go some','key':22,'role':'bot'},
-    {'content':'you see say we dey form','key':23,'role':'user'},
-    {'content':'a3 for life chale last','key':24,'role':'bot'},  
-])
 
 const flviewRef = useRef()
 
@@ -40,14 +43,16 @@ const setMessage = (val)=>{
     console.log(message.value)
 }
 
-const send =()=>{
+const send = ()=>{
     if(message.value.trim().length>0){
         Keyboard.dismiss()
-        x.value.push({'content':message.value,'key':x.value.length+1,'role':'user'})
+        chats.value.push({'content':message.value.trim(),'key':chats.value.length+1,'role':'user'})
+        // make api call
+        tochatai(message.value.trim())
+        
+        // clear field and scroll
         message.value=''
         scrollup()
-        console.log(message)
-        console.log(message.value)   
     }
     
 }
@@ -64,7 +69,7 @@ return (
     
     <View className="flex flex-col p-1 h-full w-full justify-between">
        <View className=" flex-1 mb-4">
-          <FlatList data={x.value} keyExtractor={(item)=>item.key} ref={flviewRef} 
+          <FlatList data={chats.value} keyExtractor={(item)=>item.key} ref={flviewRef} 
               renderItem={({item})=>{
                 if (item.role==="assistant") {
                     return <View className="flex-row">
