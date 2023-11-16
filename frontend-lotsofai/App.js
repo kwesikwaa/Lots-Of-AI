@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native'
 import {createMaterialBottomTabNavigator,} from '@react-navigation/material-bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SafeAreaProvider,SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider,SafeAreaView, initialWindowMetrics } from 'react-native-safe-area-context';
 
 
 import TextToImage from './routes/textToImage';
@@ -18,8 +18,8 @@ export default function App() {
 
   return (
 	<>
-		<SafeAreaProvider>
-			<SafeAreaView style={{flex:1}}>
+		{/* <SafeAreaProvider style={{flex:1}} initialMetrics={initialWindowMetrics}>
+			<SafeAreaView style={{flex:1}}> */}
 				<NavigationContainer>
 					<Tab.Navigator initialRouteName='text_to_image'>
 						<Tab.Screen name="text_to_image" component={TextToImage} 
@@ -34,8 +34,8 @@ export default function App() {
 							options={{tabBarIcon:"image-text"}}/>
 					</Tab.Navigator> 
 				</NavigationContainer> 
-			</SafeAreaView>
-		</SafeAreaProvider>
+			{/* </SafeAreaView>
+		</SafeAreaProvider> */}
 	</>
 
   );

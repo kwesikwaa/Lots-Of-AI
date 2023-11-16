@@ -1,6 +1,5 @@
 import {APIKEY} from '../env.js'
-import { chats } from '../routes/chatgpt.js'
-import { aigenimages } from '../routes/textToImage.js'
+import { aigenimages,chats } from '../data';
 
 const header = {
     "Authorization": `Bearer ${APIKEY}`,
