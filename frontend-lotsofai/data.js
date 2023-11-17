@@ -1,3 +1,6 @@
+import { signal } from "@preact/signals-react";
+
+
 export const chats = signal([
     {"role":"system","key":0,
         "content":'You are an assistant. You give brief and straightforward responses. You make your responses feel human, a bit jovial sometimes but mostly conscise'},
@@ -29,7 +32,7 @@ export const chats = signal([
 
 
 export const aigenimages = signal([
-    {'prompt':'something dey here','key':1,'image':''},
+    {'prompt':'something dey here','key':1,'image':'../assets/sk.jpg'},
     {'prompt':'so adey go some','key':2,'image':''},
     {'prompt':'you see say we dey form','key':3,'image':''},
     {'prompt':'a3 for life chale','key':4,'image':''},        
@@ -52,5 +55,5 @@ export const aigenimages = signal([
     {'prompt':'something dey here','key':21,'image':''},
     {'prompt':'so adey go some','key':22,'image':''},
     {'prompt':'you see say we dey form','key':23,'image':''},
-    {'prompt':'a3 for life chale','key':24,'image':''},  
+    {'prompt':'a3 for life chale','key':24,'image':'../assets/sk.jpg'},  
 ]);

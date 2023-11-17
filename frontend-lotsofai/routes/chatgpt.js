@@ -36,7 +36,9 @@ console.log('rendering.......to.........checking needless rendering........like 
 
 //made this function to be called cos of the ref var it cannot be used diretly. hence the need for it to be in a fxn
 const scrollup =()=>{
-    setTimeout(()=>flviewRef.current.scrollToEnd(),400)
+    // to avoid the error:  'Cannot read property 'scrollToEnd' of null'
+    // i added ?
+    setTimeout(()=>flviewRef?.current?.scrollToEn,400)
 }
 scrollup()
 
@@ -71,7 +73,7 @@ return (
           />
         </View>
       <View className=" flex flex-row justify-between mb-4 space-x-1 items-end rounded-md bg-neutral-700 shadow-md">
-          <TextInput placeholder='Enter Prompt' placeholderTextColor="white" multiline value={message} className=" text-white w-5/6 py-1.5 px-1.5"  onChangeText={(val)=>setMessage(val)}/>
+          <TextInput placeholder='Enter Prompt' placeholderTextColor="white" multiline value={message.value} className=" text-white w-5/6 py-1.5 px-1.5"  onChangeText={(val)=>setMessage(val)}/>
           <TouchableOpacity className="p-1.5 border border-zinc-300" onPress={send}><Text className=" text-white text-xl">Send</Text></TouchableOpacity>
       </View>
     </View>
