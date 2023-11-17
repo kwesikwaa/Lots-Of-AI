@@ -42,7 +42,7 @@ export default function TextToImage() {
                     <View className="bg-neutral-700 rounded-b-md rounded-r-md w-full my-2 px-2 pb-4  min-h-max">
                         <Text className=" my-2 text-white">{item.prompt}</Text>
                         <View className="bg-neutral-600 h-64 w-4/5">
-                            {item.image && <Image source={item.image} className = " w-full h-full object-contain" />}
+                            {/* {item.image && <Image source={item.image} className = " w-full h-full object-contain" />} */}
                         </View>
                     </View>
                 )}

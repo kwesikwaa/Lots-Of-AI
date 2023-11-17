@@ -25,7 +25,7 @@ export default function App() {
   return (
 	<>
 		<NavigationContainer>
-			<Tab.Navigator initialRouteName='text_to_image'>
+			<Tab.Navigator initialRouteName='translator'>
 				<Tab.Screen name="text_to_image" component={TextToImage} 
 					/*options={{tabBarIcon: "image-edit"}}*/ />
 				<Tab.Screen name="chatgpt" component={Chatgpt}
