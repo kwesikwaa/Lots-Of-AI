@@ -5,23 +5,19 @@ import { signal } from '@preact/signals-react';
 import { todalle } from '../api/openaicall';
 
 import { aigenimages } from '../data';
+import InputText from '../component/InputText';
 
 
 export default function TextToImage() {
-
+    const flviewRef = useRef()
     
 
-    const flviewRef = useRef()
-    const message = signal('')
-
-    const send =()=>{
-        if(message.value.trim().length>0){
+    const send =(val)=>{
+        if(val.trim().length>0){
             Keyboard.dismiss()
-            aigenimages.value.push({'prompt':message.value,'key':aigenimages.value.length+1,'images':''})
+            aigenimages.value.push({'prompt':val.trim(),'key':aigenimages.value.length+1,'images':''})
             
-            todalle(message.value,aigenimages.value.length-1)
-            
-            message.value=''
+            todalle(val.trim(),aigenimages.value.length-1)
             scrollup()   
         }   
     }
@@ -39,19 +35,16 @@ export default function TextToImage() {
         <View className="flex-1 mb-4">
             <FlatList data={aigenimages.value} keyExtractor={(item)=>item.key} ref={flviewRef}
                 renderItem={({item})=>(
-                    <View className="bg-neutral-700 rounded-b-md rounded-r-md w-full my-2 px-2 pb-4  min-h-max">
-                        <Text className=" my-2 text-white">{item.prompt}</Text>
-                        <View className="bg-neutral-600 h-64 w-4/5">
+                    <View className="bg-zinc-800 flex flex-col items-end rounded-b-md rounded-r-md w-full my-2 px-2 pb-4  min-h-max">
+                        <Text className=" my-2 text-right text-white">{item.prompt}</Text>
+                        <View className="bg-zinc-600 h-72 w-11/12">
                             {/* {item.image && <Image source={item.image} className = " w-full h-full object-contain" />} */}
                         </View>
                     </View>
                 )}
             />
         </View>
-        <View className="mb-4 flex flex-row justify-between space-x-1 items-end rounded-md bg-neutral-700 shadow-md">
-          <TextInput placeholder='Enter Prompt' placeholderTextColor="white" multiline value={message.value}   onChangeText={(val)=> message.value=val} className=" text-white w-5/6 py-1.5 px-1.5"/>
-          <TouchableOpacity className="p-1.5 border border-zinc-300" onPress={send}><Text className=" text-white text-xl">Send</Text></TouchableOpacity>
-        </View>
+        <InputText send={send} />
     </View>
     )
 }
