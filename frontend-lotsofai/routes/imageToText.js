@@ -41,7 +41,7 @@ export default function ImageToText() {
 
   async function  snapphoto (){
     try{
-      await ImagePicker.requestCameraPermissionAsync()
+      await ImagePicker.requestCameraPermissionsAsync()
       const res = await ImagePicker.launchCameraAsync({allowsEditing:true, quality: 1})
       
       if(!res.canceled){
@@ -89,7 +89,7 @@ export default function ImageToText() {
             )}
         />
       </View>
-      <View className="flex  justify-center items-center bg-white">
+      {/* <View className="flex  justify-center items-center bg-white">
         <Modal animationType='slide' transparent={true} onRequestClose={()=>{}}> 
           <View>
               <TextInput placeholder='enter title here' onChangeText={(val)=>pullTitle}/>
@@ -99,7 +99,7 @@ export default function ImageToText() {
               </View>
           </View>
         </Modal>
-      </View>
+      </View> */}
       <View className="flex flex-row justify-center space-x-4 mb-10 ">
         <TouchableOpacity onPress={loadImageFromDevice} className="  w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center"><Text className="text-white">file</Text></TouchableOpacity>
         <TouchableOpacity onPress={snapphoto} className=" w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center"><Text className="text-white">photo</Text></TouchableOpacity>
