@@ -19,7 +19,7 @@ export default function Translator() {
 
   return (
     <View className="flex flex-col p-1 h-full w-full justify-between">
-      <View className=" h-5/6">
+      {/* <View className=" h-5/6">
         <FlatList data={x} keyExtractor={(item)=>item.id} inverted={true}
             renderItem={({item})=>(
               <View className=" bg-slate-500 rounded-lg w-full p-1.5 h-40 flex flex-row my-1">
@@ -38,7 +38,7 @@ export default function Translator() {
       <View className="flex flex-row justify-center space-x-4 mb-10 ">
         <TouchableOpacity className={" w-20 h-20 bg-neutral-700 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center"} ><Text className="text-white">file</Text></TouchableOpacity>
         <TouchableOpacity className=" w-20 h-20 bg-neutral-700 border-dotted border-neutral-500 border-8 rounded-full flex items-center justify-center"><Text className="text-white">record</Text></TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   )
 }
