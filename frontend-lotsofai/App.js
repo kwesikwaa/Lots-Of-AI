@@ -24,7 +24,7 @@ export default function App() {
   return (
 	<>
 		<NavigationContainer>
-			<Tab.Navigator initialRouteName='translator'
+			<Tab.Navigator initialRouteName='chatgpt'
 				screenOptions={({route,navigation})=>({
 					tabBarIcon:({color, focused, size})=>{
 						let iconName;

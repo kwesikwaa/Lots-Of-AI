@@ -7,6 +7,7 @@ import { TextInput, TouchableOpacity, View, Text } from "react-native"
 
 export default function InputText({send}){
     const [text,setText] = useState('')
+    console.log('child rebuilding...')
 
     return (
         <View className=" flex flex-row justify-between mb-4 space-x-1 items-end rounded-md w-full bg-neutral-800 shadow-md">

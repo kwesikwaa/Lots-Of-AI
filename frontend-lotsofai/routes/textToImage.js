@@ -1,5 +1,5 @@
 import { View, Text,Image, FlatList, TextInput, TouchableOpacity, Keyboard } from 'react-native'
-import React,{useRef} from 'react'
+import {useRef} from 'react'
 import { signal } from '@preact/signals-react';
 
 import { todalle } from '../api/openaicall';
@@ -29,7 +29,7 @@ export default function TextToImage() {
     }
     scrollup()
     
-
+    console.log('parent rubuilind...')
     return (
     <View className="flex flex-col p-1 h-full w-full justify-between">
         <View className="flex-1 mb-4">

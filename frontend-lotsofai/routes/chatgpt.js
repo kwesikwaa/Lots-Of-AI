@@ -1,5 +1,5 @@
 import { View, Text, FlatList, TextInput, Keyboard, TouchableOpacity } from 'react-native'
-import React,{useRef, useState} from 'react'
+import {useRef} from 'react'
 import { signal } from '@preact/signals-react';
 import { tochatai } from '../api/openaicall';
 

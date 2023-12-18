@@ -1,16 +1,29 @@
 import { View, Text, FlatList, TextInput, Button, Pressable, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { useState } from 'react'
 import { useSignal } from '@preact/signals-react'
-
+import * as ImagePicker from 'expo-image-picker'
 export default function Transcriptor() {
 
   const toggle = useSignal(false)
   const togglemood = useSignal('record')
 
+  const [picked, setPicked] = useState('')
+
   const dotoggle = ()=>{
     toggle.value = !toggle.value
     togglemood.value=toggle.value?'stop':'record'
     console.log(toggle.value)
+  }
+
+  async function loadVideoFromDevice(){
+    try{
+      await ImagePicker.requestMediaLibraryPermissionsAsync()
+      const res = await ImagePicker.launchImageLibraryAsync({allowsEditing:true, quality:1,mediaTypes:ImagePicker.MediaTypeOptions.Videos})
+    
+      if(!res.canceled){
+        await setPicked(res.assets[0].uri)
+      }
+    }catch(error){console.log(error)}
   }
 
 
