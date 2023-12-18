@@ -2,10 +2,12 @@ import { View, Text, FlatList, TextInput, Button, Pressable, TouchableOpacity } 
 import { useState } from 'react'
 import { useSignal } from '@preact/signals-react'
 import * as ImagePicker from 'expo-image-picker'
+import { Icon } from 'react-native-paper'
 export default function Transcriptor() {
 
   const toggle = useSignal(false)
   const togglemood = useSignal('record')
+
 
   const [picked, setPicked] = useState('')
 
@@ -21,13 +23,22 @@ export default function Transcriptor() {
       const res = await ImagePicker.launchImageLibraryAsync({allowsEditing:true, quality:1,mediaTypes:ImagePicker.MediaTypeOptions.Videos})
     
       if(!res.canceled){
-        await setPicked(res.assets[0].uri)
+        setPicked(res.assets[0].uri)
       }
     }catch(error){console.log(error)}
   }
 
-
-  console.log('----------------build------------')
+  async function VideoCamera(){
+    try{
+      await ImagePicker.requestCameraPermissionsAsync()
+      const res = await ImagePicker.launchCameraAsync({quality:1,mediaTypes:ImagePicker.MediaTypeOptions.Videos})
+    
+      if(!res.canceled){
+        setPicked(res.assets[0].uri)
+        console.log(picked)
+      }
+    }catch(error){console.log(error)}
+  }
 
   const x =[
     {
@@ -63,17 +74,10 @@ export default function Transcriptor() {
         />
       </View>
       <View className="flex flex-row justify-center space-x-4 mb-10 ">
-        {
-          toggle.value &&
-            (<TouchableOpacity className="w-20 h-20 bg-red-600 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center" onPress={dotoggle} ><Text className="text-white">stop</Text></TouchableOpacity>    )
-        }
-        {
-          !toggle.value &&
-          (<TouchableOpacity className="w-20 h-20 bg-green-600 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center" onPress={dotoggle} ><Text className="text-white">record</Text></TouchableOpacity>    )
-        }
-        
-        {/* <TouchableOpacity className={` w-20 h-20 ${toggle.value?'bg-neutral-700':'bg-green-600'} border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center`} onPress={dotoggle} ><Text className="text-white">record</Text></TouchableOpacity> */}
-        <TouchableOpacity className=" w-20 h-20 bg-neutral-700 border-dotted border-neutral-500 border-8 rounded-full flex items-center justify-center"><Text className="text-white">file</Text></TouchableOpacity>
+        <TouchableOpacity className="w-20 h-20 bg-green-600 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center" onPress={()=>VideoCamera()}><Icon source="video" color='white' size={30} /></TouchableOpacity>
+        <TouchableOpacity className="w-20 h-20 bg-green-600 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center" onPress={()=>loadVideoFromDevice()}><Icon source="file-video" color='white' size={30} /></TouchableOpacity>
+        <TouchableOpacity className=" w-20 h-20 bg-neutral-700 border-dotted border-neutral-500 border-8 rounded-full flex items-center justify-center"><Icon source="microphone" color='white' size={30} /></TouchableOpacity>
+        <TouchableOpacity className=" w-20 h-20 bg-neutral-700 border-dotted border-neutral-500 border-8 rounded-full flex items-center justify-center"><Icon source="file" color='white' size={30} /></TouchableOpacity>
       </View>
     </View>
   )

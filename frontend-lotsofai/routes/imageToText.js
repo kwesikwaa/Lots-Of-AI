@@ -62,8 +62,8 @@ export default function ImageToText() {
     }
   }
 
-  async function save(){
-    await docket.push({"id":Date(),"image":picked, "extractedText": tempextract, "title":title})
+  function save(){
+    docket.push({"id":Date(),"image":picked, "extractedText": tempextract, "title":title})
     title = ''
     Alert.alert("Saved",'Saved Successfully!')
     setModal(false)
