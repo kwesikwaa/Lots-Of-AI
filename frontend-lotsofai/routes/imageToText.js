@@ -1,6 +1,7 @@
 import { View, Text, FlatList, Modal,TextInput, TouchableOpacity, Alert, Image } from 'react-native'
 import {useState } from 'react'
 import TextRecognition from 'react-native-text-recognition'
+import { Icon } from 'react-native-paper'
 
 import * as ImagePicker from 'expo-image-picker'
 
@@ -129,8 +130,8 @@ export default function ImageToText() {
       </Modal>
       
       <View className="flex flex-row justify-center space-x-4 mb-10 ">
-        <TouchableOpacity onPress={loadImageFromDevice} className="  w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center"><Text className="text-white">file</Text></TouchableOpacity>
-        <TouchableOpacity onPress={snapphoto} className=" w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center"><Text className="text-white">photo</Text></TouchableOpacity>
+        <TouchableOpacity onPress={loadImageFromDevice} className="  w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center"><Icon source="file-image" size={30} color="white" /></TouchableOpacity>
+        <TouchableOpacity onPress={snapphoto} className=" w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center"><Icon source="camera" size={30} color="white" /></TouchableOpacity>
       </View>
     </View>
   )

@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { useSignal } from '@preact/signals-react'
 import * as ImagePicker from 'expo-image-picker'
 import { Icon } from 'react-native-paper'
+
+
+
 export default function Transcriptor() {
 
   const toggle = useSignal(false)
@@ -38,6 +41,25 @@ export default function Transcriptor() {
         console.log(picked)
       }
     }catch(error){console.log(error)}
+  }
+
+  async function AudioRecord(){
+    await Audio.requestPermissionAsync()
+    await Audio.setAudioModeAsync()
+
+    const {recording} = await Audio.Recording.createAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY)
+    // now push recording to the setvariable
+  }
+  async function StopRecording(){
+    // set the variable back to null
+    await variablename.stopAndUnloadAsync()
+    // add to array
+    const {sound, status} = await variablename.createNewLoadedSoundAsync()
+    
+  }
+
+  async function AudioFile(){
+    // load audio from file
   }
 
   const x =[
@@ -76,7 +98,12 @@ export default function Transcriptor() {
       <View className="flex flex-row justify-center space-x-4 mb-10 ">
         <TouchableOpacity className="w-20 h-20 bg-green-600 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center" onPress={()=>VideoCamera()}><Icon source="video" color='white' size={30} /></TouchableOpacity>
         <TouchableOpacity className="w-20 h-20 bg-green-600 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center" onPress={()=>loadVideoFromDevice()}><Icon source="file-video" color='white' size={30} /></TouchableOpacity>
-        <TouchableOpacity className=" w-20 h-20 bg-neutral-700 border-dotted border-neutral-500 border-8 rounded-full flex items-center justify-center"><Icon source="microphone" color='white' size={30} /></TouchableOpacity>
+        
+        <View className="flex flex-col items-center">
+          <TouchableOpacity className=" w-20 h-20 bg-neutral-700 border-dotted border-neutral-500 border-8 rounded-full flex items-center justify-center"><Icon source="microphone" color='white' size={30} /></TouchableOpacity>
+          <TouchableOpacity className="w-10 h-10 bg-yellow-600 border-dotted border-neutral-700 border-8 rounded-full flex items-center justify-center" onPress={()=>VideoCamera()}><Icon source="pause" color='white' size={20} /></TouchableOpacity>
+        </View>
+
         <TouchableOpacity className=" w-20 h-20 bg-neutral-700 border-dotted border-neutral-500 border-8 rounded-full flex items-center justify-center"><Icon source="file" color='white' size={30} /></TouchableOpacity>
       </View>
     </View>
