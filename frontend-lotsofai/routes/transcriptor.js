@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useSignal } from '@preact/signals-react'
 import * as ImagePicker from 'expo-image-picker'
 import { Icon } from 'react-native-paper'
+import Audio from 'expo-av'
 
 
 
@@ -43,7 +44,10 @@ export default function Transcriptor() {
     }catch(error){console.log(error)}
   }
 
+  
+
   async function AudioRecord(){
+    
     await Audio.requestPermissionAsync()
     await Audio.setAudioModeAsync()
 
@@ -55,7 +59,7 @@ export default function Transcriptor() {
     await variablename.stopAndUnloadAsync()
     // add to array
     const {sound, status} = await variablename.createNewLoadedSoundAsync()
-    
+
   }
 
   async function AudioFile(){
